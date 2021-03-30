@@ -1,5 +1,7 @@
 // Copyright 2021 Gushchin Artem
 
+#include <tuple>
+
 #include <gtest/gtest.h>
 
 #include "include/complex_number.h"

@@ -3,13 +3,12 @@
 #include <gtest/gtest.h>
 
 #include "include/complex_number.h"
-#include <iostream>
 
 TEST(Gushchin_Artem_ComplexNumberTest, Getters_And_Setters) {
     double re = -7.93;
     double im = 7.5;
     ComplexNumber z(-8.58, 32.7);
-    
+
     z.setRe(re);
     z.setIm(im);
 
@@ -17,12 +16,14 @@ TEST(Gushchin_Artem_ComplexNumberTest, Getters_And_Setters) {
     EXPECT_EQ(im, z.getIm());
 }
 
-class Gushchin_Artem_Operations_ComplexNumberTest : public ::testing::TestWithParam<std::tuple<double, double, double, double>> {
-public:
+class Gushchin_Artem_Operations_ComplexNumberTest :
+    public ::testing::TestWithParam<std::tuple<double, double,
+                                               double, double>> {
+ public:
     Gushchin_Artem_Operations_ComplexNumberTest() :
         operator1(std::get<0>(GetParam()), std::get<1>(GetParam())),
         operator2(std::get<2>(GetParam()), std::get<3>(GetParam())) {}
-protected:
+ protected:
     ComplexNumber operator1, operator2;
 };
 

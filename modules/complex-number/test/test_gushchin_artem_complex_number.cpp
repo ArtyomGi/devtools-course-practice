@@ -14,8 +14,8 @@ TEST(Gushchin_Artem_ComplexNumberTest, Getters_And_Setters) {
     z.setRe(re);
     z.setIm(im);
 
-    EXPECT_EQ(re, z.getRe());
-    EXPECT_EQ(im, z.getIm());
+    ASSERT_EQ(re, z.getRe());
+    ASSERT_EQ(im, z.getIm());
 }
 
 class Gushchin_Artem_Operations_ComplexNumberTest :
@@ -29,7 +29,7 @@ class Gushchin_Artem_Operations_ComplexNumberTest :
     ComplexNumber operator1, operator2;
 };
 
-TEST_P(Gushchin_Artem_Operations_ComplexNumberTest, Sum_Operation) {
+TEST_P(Gushchin_Artem_Operations_ComplexNumberTest, Sum_Operation_Is_Correct) {
     double reManual = std::get<0>(GetParam()) + std::get<2>(GetParam());
     double imManual = std::get<1>(GetParam()) + std::get<3>(GetParam());
 
@@ -38,7 +38,7 @@ TEST_P(Gushchin_Artem_Operations_ComplexNumberTest, Sum_Operation) {
     ASSERT_EQ(ComplexNumber(reManual, imManual), res);
 }
 
-TEST_P(Gushchin_Artem_Operations_ComplexNumberTest, Diff_Operation) {
+TEST_P(Gushchin_Artem_Operations_ComplexNumberTest, Diff_Operation_Is_Correct) {
     double reManual = std::get<0>(GetParam()) - std::get<2>(GetParam());
     double imManual = std::get<1>(GetParam()) - std::get<3>(GetParam());
 
@@ -47,7 +47,7 @@ TEST_P(Gushchin_Artem_Operations_ComplexNumberTest, Diff_Operation) {
     ASSERT_EQ(ComplexNumber(reManual, imManual), res);
 }
 
-TEST_P(Gushchin_Artem_Operations_ComplexNumberTest, Mult_Operation) {
+TEST_P(Gushchin_Artem_Operations_ComplexNumberTest, Mult_Operation_Is_Correct) {
     double a1 = std::get<0>(GetParam());
     double b1 = std::get<1>(GetParam());
     double a2 = std::get<2>(GetParam());
@@ -60,8 +60,7 @@ TEST_P(Gushchin_Artem_Operations_ComplexNumberTest, Mult_Operation) {
     ASSERT_EQ(ComplexNumber(reManual, imManual), res);
 }
 
-INSTANTIATE_TEST_CASE_P(
-    ,
+INSTANTIATE_TEST_CASE_P(,
     Gushchin_Artem_Operations_ComplexNumberTest,
     ::testing::Values(
         std::make_tuple(153.37, -96.22, 68.03, -75.92),

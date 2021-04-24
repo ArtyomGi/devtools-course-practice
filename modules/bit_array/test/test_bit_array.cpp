@@ -200,7 +200,7 @@ TEST(Bit_Array_Test, And_Operator_Applied_To_Bit_Arrays_Of_Equal_Size) {
     ASSERT_EQ(expBf, bf1 & bf2);
 }
 
-TEST(Bit_Array_Test, And_Operator_Applied_To_Bit_Arrays_Of_Non_Equal_Size) {
+TEST(Bit_Array_Test, And_Operator_First_Array_Less_Second) {
     const int size1 = 4, size2 = 5;
     BitArray bf1(size1), bf2(size2), expBf(size2);
     // bf1 = 0011
@@ -215,6 +215,25 @@ TEST(Bit_Array_Test, And_Operator_Applied_To_Bit_Arrays_Of_Non_Equal_Size) {
 
     ASSERT_EQ(expBf, bf1 & bf2);
 }
+
+TEST(Bit_Array_Test, And_Operator_Second_Array_Less_First) {
+    const int size1 = 8, size2 = 6;
+    BitArray bf1(size1), bf2(size2), expBf(size2);
+    // bf1 = 100100100
+    bf1.SetBit(3);
+    bf1.SetBit(6);
+    bf1.SetBit(8);
+    // bf2 = 100011
+    bf2.SetBit(1);
+    bf2.SetBit(2);
+    bf2.SetBit(6);
+
+    // expBf = 000100000
+    expBf.SetBit(6);
+
+    ASSERT_EQ(expBf, bf1 & bf2);
+}
+
 
 TEST(Bit_Array_Test, Can_Invert_Bit_Array) {
     const int size = 2;

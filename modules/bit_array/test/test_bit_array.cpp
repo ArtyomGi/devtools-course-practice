@@ -2,7 +2,7 @@
 
 #include <gtest/gtest.h>
 
-#include <tuple>
+#include <vector>
 
 #include "include/bit_array.h"
 

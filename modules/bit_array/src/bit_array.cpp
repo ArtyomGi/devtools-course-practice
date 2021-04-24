@@ -90,18 +90,18 @@ bool BitArray::operator==(const BitArray &bf) const {
     if (MemLen == bf.MemLen) {
         for (int i = 0; i < MemLen; i++)
             if (pMem[i] != bf.pMem[i])
-                return 0;
+                return false;
     } else if (bf.MemLen < MemLen) {
         for (int i = 0; i < bf.MemLen; i++)
             if (pMem[i] != bf.pMem[i])
-                return 0;
+                return false;
         for (int i = bf.MemLen; i < MemLen; i++)
             if (pMem[i])
                 return false;
     } else if (bf.MemLen > MemLen) {
         for (int i = 0; i < MemLen; i++)
             if (pMem[i] != bf.pMem[i])
-                return 0;
+                return false;
         for (int i = MemLen; i < bf.MemLen; i++)
             if (bf.pMem[i])
                 return false;

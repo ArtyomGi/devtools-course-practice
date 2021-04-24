@@ -164,7 +164,7 @@ TEST(Bit_Array_Test, Compare_Non_Equal_Bit_Arrays_First_Less_Second) {
 TEST(Bit_Array_Test, Compare_Partially_Equal_Bit_Arrays_First_Less_Second) {
     const int size1 = sizeof(uint) * 8 * 2, size2 = sizeof(uint) * 8 * 3;
     BitArray bf1(size1), bf2(size2);
-    
+
     for (int i = 0; i < size1; i++) {
         bf1.SetBit(i);
         bf2.SetBit(i);

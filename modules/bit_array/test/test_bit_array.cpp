@@ -6,17 +6,17 @@
 
 #include "include/bit_array.h"
 
-TEST(Bit_Array_Test, Can_Create_Bitfield_With_Positive_Length) {
+TEST(Bit_Array_Test, Can_Create_Bit_Array_With_Positive_Length) {
     ASSERT_NO_THROW(BitArray bf(3));
 }
 
-TEST(Bit_Array_Test, can_get_length) {
+TEST(Bit_Array_Test, Can_Get_Length) {
     BitArray bf(3);
 
-    EXPECT_EQ(3, bf.GetLength());
+    ASSERT_EQ(3, bf.GetLength());
 }
 
-TEST(Bit_Array_Test, New_Bitfield_Is_Set_To_Zero) {
+TEST(Bit_Array_Test, New_Bit_Array_Is_Set_To_Zero) {
     BitArray bf(100);
 
     int sum = 0;
@@ -24,16 +24,30 @@ TEST(Bit_Array_Test, New_Bitfield_Is_Set_To_Zero) {
         sum += bf.GetBit(i);
     }
 
-    EXPECT_EQ(0, sum);
+    ASSERT_EQ(0, sum);
+}
+
+TEST(Bit_Array_Test, Can_Construct_From_Another_Bit_Array) {
+    BitArray bf(15);
+    bf.SetBit(1);
+    bf.SetBit(3);
+    bf.SetBit(14);
+
+    BitArray constructed(bf);
+
+    ASSERT_EQ(bf, constructed);
+    ASSERT_EQ(1, constructed.GetBit(1));
+    ASSERT_EQ(1, constructed.GetBit(3));
+    ASSERT_EQ(1, constructed.GetBit(14));
 }
 
 TEST(Bit_Array_Test, Can_Set_Bit) {
     BitArray bf(10);
 
-    EXPECT_EQ(0, bf.GetBit(3));
+    ASSERT_EQ(0, bf.GetBit(3));
 
     bf.SetBit(3);
-    EXPECT_NE(0, bf.GetBit(3));
+    ASSERT_NE(0, bf.GetBit(3));
 }
 
 TEST(Bit_Array_Test, Can_Clear_Bit) {
@@ -42,13 +56,13 @@ TEST(Bit_Array_Test, Can_Clear_Bit) {
     int bitIdx = 3;
 
     bf.SetBit(bitIdx);
-    EXPECT_NE(0, bf.GetBit(bitIdx));
+    ASSERT_NE(0, bf.GetBit(bitIdx));
 
     bf.ClrBit(bitIdx);
-    EXPECT_EQ(0, bf.GetBit(bitIdx));
+    ASSERT_EQ(0, bf.GetBit(bitIdx));
 }
 
-TEST(Bit_Array_Test, Throws_When_Create_Bitfield_With_Negative_Length) {
+TEST(Bit_Array_Test, Throws_When_Create_Bit_Array_With_Negative_Length) {
     ASSERT_ANY_THROW(BitArray bf(-3));
 }
 
@@ -88,7 +102,7 @@ TEST(Bit_Array_Test, Throws_When_Clear_Bit_With_Too_Large_Index) {
     ASSERT_ANY_THROW(bf.ClrBit(11));
 }
 
-TEST(Bit_Array_Test, Can_Assign_Bitfields_Of_Equal_Size) {
+TEST(Bit_Array_Test, Can_Assign_Bit_Arrays_Of_Equal_Size) {
     const int size = 2;
     BitArray bf1(size), bf2(size);
     for (int i = 0; i < size; i++) {
@@ -96,11 +110,11 @@ TEST(Bit_Array_Test, Can_Assign_Bitfields_Of_Equal_Size) {
     }
     bf2 = bf1;
 
-    EXPECT_NE(0, bf2.GetBit(0));
-    EXPECT_NE(0, bf2.GetBit(1));
+    ASSERT_NE(0, bf2.GetBit(0));
+    ASSERT_NE(0, bf2.GetBit(1));
 }
 
-TEST(Bit_Array_Test, Assign_Operator_Changes_Bitfield_Size) {
+TEST(Bit_Array_Test, Assign_Operator_Changes_Bit_Array_Size) {
     const int size1 = 2, size2 = 5;
     BitArray bf1(size1), bf2(size2);
     for (int i = 0; i < size1; i++) {
@@ -108,10 +122,10 @@ TEST(Bit_Array_Test, Assign_Operator_Changes_Bitfield_Size) {
     }
     bf2 = bf1;
 
-    EXPECT_EQ(2, bf2.GetLength());
+    ASSERT_EQ(2, bf2.GetLength());
 }
 
-TEST(Bit_Array_Test, Can_Assign_Bitfields_Of_Non_Equal_Size) {
+TEST(Bit_Array_Test, Can_Assign_Bit_Arrays_Of_Non_Equal_Size) {
     const int size1 = 2, size2 = 5;
     BitArray bf1(size1), bf2(size2);
     for (int i = 0; i < size1; i++) {
@@ -119,11 +133,11 @@ TEST(Bit_Array_Test, Can_Assign_Bitfields_Of_Non_Equal_Size) {
     }
     bf2 = bf1;
 
-    EXPECT_NE(0, bf2.GetBit(0));
-    EXPECT_NE(0, bf2.GetBit(1));
+    ASSERT_NE(0, bf2.GetBit(0));
+    ASSERT_NE(0, bf2.GetBit(1));
 }
 
-TEST(Bit_Array_Test, Compare_Equal_Bitfields_Of_Equal_Size) {
+TEST(Bit_Array_Test, Compare_Equal_Bit_Arrays_Of_Equal_Size) {
     const int size = 2;
     BitArray bf1(size), bf2(size);
     for (int i = 0; i < size; i++) {
@@ -131,10 +145,10 @@ TEST(Bit_Array_Test, Compare_Equal_Bitfields_Of_Equal_Size) {
     }
     bf2 = bf1;
 
-    EXPECT_EQ(bf1, bf2);
+    ASSERT_EQ(bf1, bf2);
 }
 
-TEST(Bit_Array_Test, Or_Operator_Applied_To_Bitfields_Of_Equal_Size) {
+TEST(Bit_Array_Test, Or_Operator_Applied_To_Bit_Arrays_Of_Equal_Size) {
     const int size = 4;
     BitArray bf1(size), bf2(size), expBf(size);
     // bf1 = 0011
@@ -149,10 +163,10 @@ TEST(Bit_Array_Test, Or_Operator_Applied_To_Bitfields_Of_Equal_Size) {
     expBf.SetBit(2);
     expBf.SetBit(3);
 
-    EXPECT_EQ(expBf, bf1 | bf2);
+    ASSERT_EQ(expBf, bf1 | bf2);
 }
 
-TEST(Bit_Array_Test, Or_Operator_Applied_To_Bitfields_Of_Non_Equal_Size) {
+TEST(Bit_Array_Test, Or_Operator_Applied_To_Bit_Arrays_Of_Non_Equal_Size) {
     const int size1 = 4, size2 = 5;
     BitArray bf1(size1), bf2(size2), expBf(size2);
     // bf1 = 0011
@@ -167,10 +181,10 @@ TEST(Bit_Array_Test, Or_Operator_Applied_To_Bitfields_Of_Non_Equal_Size) {
     expBf.SetBit(2);
     expBf.SetBit(3);
 
-    EXPECT_EQ(expBf, bf1 | bf2);
+    ASSERT_EQ(expBf, bf1 | bf2);
 }
 
-TEST(Bit_Array_Test, And_Operator_Applied_To_Bitfields_Of_Equal_Size) {
+TEST(Bit_Array_Test, And_Operator_Applied_To_Bit_Arrays_Of_Equal_Size) {
     const int size = 4;
     BitArray bf1(size), bf2(size), expBf(size);
     // bf1 = 0011
@@ -183,10 +197,10 @@ TEST(Bit_Array_Test, And_Operator_Applied_To_Bitfields_Of_Equal_Size) {
     // expBf = 0001
     expBf.SetBit(3);
 
-    EXPECT_EQ(expBf, bf1 & bf2);
+    ASSERT_EQ(expBf, bf1 & bf2);
 }
 
-TEST(Bit_Array_Test, And_Operator_Applied_To_Bitfields_Of_Non_Equal_Size) {
+TEST(Bit_Array_Test, And_Operator_Applied_To_Bit_Arrays_Of_Non_Equal_Size) {
     const int size1 = 4, size2 = 5;
     BitArray bf1(size1), bf2(size2), expBf(size2);
     // bf1 = 0011
@@ -199,10 +213,10 @@ TEST(Bit_Array_Test, And_Operator_Applied_To_Bitfields_Of_Non_Equal_Size) {
     // expBf = 00010
     expBf.SetBit(3);
 
-    EXPECT_EQ(expBf, bf1 & bf2);
+    ASSERT_EQ(expBf, bf1 & bf2);
 }
 
-TEST(Bit_Array_Test, Can_Invert_Bitfield) {
+TEST(Bit_Array_Test, Can_Invert_Bit_Array) {
     const int size = 2;
     BitArray bf(size), negBf(size), expNegBf(size);
     // bf = 01
@@ -212,10 +226,10 @@ TEST(Bit_Array_Test, Can_Invert_Bitfield) {
     // expNegBf = 10
     expNegBf.SetBit(0);
 
-    EXPECT_EQ(expNegBf, negBf);
+    ASSERT_EQ(expNegBf, negBf);
 }
 
-TEST(Bit_Array_Test, Can_Invert_Large_Bitfield) {
+TEST(Bit_Array_Test, Can_Invert_Large_Bit_Array) {
     const int size = 38;
     BitArray bf(size), negBf(size), expNegBf(size);
     bf.SetBit(35);
@@ -225,10 +239,10 @@ TEST(Bit_Array_Test, Can_Invert_Large_Bitfield) {
         expNegBf.SetBit(i);
     expNegBf.ClrBit(35);
 
-    EXPECT_EQ(expNegBf, negBf);
+    ASSERT_EQ(expNegBf, negBf);
 }
 
-TEST(Bit_Array_Test, Invert_Plus_And_Operator_On_Different_Size_Bitfield) {
+TEST(Bit_Array_Test, Invert_Plus_And_Operator_On_Different_Size_Bit_Array) {
     const int firstSze = 4, secondSize = 8;
     BitArray firstBf(firstSze), negFirstBf(firstSze),
              secondBf(secondSize), testBf(secondSize);
@@ -244,10 +258,10 @@ TEST(Bit_Array_Test, Invert_Plus_And_Operator_On_Different_Size_Bitfield) {
     // testBf = 00001000
     testBf.SetBit(3);
 
-    EXPECT_EQ(secondBf & negFirstBf, testBf);
+    ASSERT_EQ(secondBf & negFirstBf, testBf);
 }
 
-TEST(Bit_Array_Test, Can_Invert_Many_Random_Bits_Bitfield) {
+TEST(Bit_Array_Test, Can_Invert_Many_Random_Bits_Bit_Array) {
     const int size = 38;
     BitArray bf(size), negBf(size), expNegBf(size);
 
@@ -269,10 +283,10 @@ TEST(Bit_Array_Test, Can_Invert_Many_Random_Bits_Bitfield) {
     for (unsigned int i = 0; i < bits.size(); i++)
         expNegBf.ClrBit(bits[i]);
 
-    EXPECT_EQ(expNegBf, negBf);
+    ASSERT_EQ(expNegBf, negBf);
 }
 
-TEST(Bit_Array_Test, Bitfields_With_Different_Bits_Are_Not_Equal) {
+TEST(Bit_Array_Test, Bit_Arrays_With_Different_Bits_Are_Not_Equal) {
     const int size = 4;
     BitArray bf1(size), bf2(size);
 
@@ -282,5 +296,5 @@ TEST(Bit_Array_Test, Bitfields_With_Different_Bits_Are_Not_Equal) {
     bf2.SetBit(1);
     bf2.SetBit(2);
 
-    EXPECT_NE(bf1, bf2);
+    ASSERT_NE(bf1, bf2);
 }

@@ -105,6 +105,7 @@ TEST(Bit_Array_Test, Throws_When_Clear_Bit_With_Too_Large_Index) {
 TEST(Bit_Array_Test, Can_Assign_Bit_Arrays_Of_Equal_Size) {
     const int size = 2;
     BitArray bf1(size), bf2(size);
+
     for (int i = 0; i < size; i++) {
         bf1.SetBit(i);
     }
@@ -117,6 +118,7 @@ TEST(Bit_Array_Test, Can_Assign_Bit_Arrays_Of_Equal_Size) {
 TEST(Bit_Array_Test, Assign_Operator_Changes_Bit_Array_Size) {
     const int size1 = 2, size2 = 5;
     BitArray bf1(size1), bf2(size2);
+
     for (int i = 0; i < size1; i++) {
         bf1.SetBit(i);
     }
@@ -128,6 +130,7 @@ TEST(Bit_Array_Test, Assign_Operator_Changes_Bit_Array_Size) {
 TEST(Bit_Array_Test, Can_Assign_Bit_Arrays_Of_Non_Equal_Size) {
     const int size1 = 2, size2 = 5;
     BitArray bf1(size1), bf2(size2);
+
     for (int i = 0; i < size1; i++) {
         bf1.SetBit(i);
     }
@@ -202,6 +205,7 @@ TEST(Bit_Array_Test, Compare_Partially_Equal_Bit_Arrays_Second_Less_First) {
 TEST(Bit_Array_Test, Or_Operator_Applied_To_Bit_Arrays_Of_Equal_Size) {
     const int size = 4;
     BitArray bf1(size), bf2(size), expBf(size);
+
     // bf1 = 0011
     bf1.SetBit(2);
     bf1.SetBit(3);
@@ -220,6 +224,7 @@ TEST(Bit_Array_Test, Or_Operator_Applied_To_Bit_Arrays_Of_Equal_Size) {
 TEST(Bit_Array_Test, Or_Operator_First_Array_Less_Second) {
     const int size1 = sizeof(uint) * 8 * 1, size2 = sizeof(uint) * 8 * 4;
     BitArray bf1(size1), bf2(size2), expBf(size2);
+
     // bf1 = 0..1..00110
     bf1.SetBit(2);
     bf1.SetBit(3);
@@ -242,6 +247,7 @@ TEST(Bit_Array_Test, Or_Operator_First_Array_Less_Second) {
 TEST(Bit_Array_Test, Or_Operator_Second_Array_Less_First) {
     const int size1 = sizeof(uint) * 8 * 6, size2 = sizeof(uint) * 8 * 2;
     BitArray bf1(size1), bf2(size2), expBf(size1);
+
     // bf1 = 1..1..1..000001
     bf1.SetBit(1);
     bf1.SetBit(8);
@@ -267,6 +273,7 @@ TEST(Bit_Array_Test, Or_Operator_Second_Array_Less_First) {
 TEST(Bit_Array_Test, And_Operator_Applied_To_Bit_Arrays_Of_Equal_Size) {
     const int size = 4;
     BitArray bf1(size), bf2(size), expBf(size);
+
     // bf1 = 0011
     bf1.SetBit(2);
     bf1.SetBit(3);
@@ -283,6 +290,7 @@ TEST(Bit_Array_Test, And_Operator_Applied_To_Bit_Arrays_Of_Equal_Size) {
 TEST(Bit_Array_Test, And_Operator_First_Array_Less_Second) {
     const int size1 = sizeof(uint) * 8 * 2, size2 = sizeof(uint) * 8 * 3;
     BitArray bf1(size1), bf2(size2), expBf(size2);
+
     // bf1 = 0..1..00011
     bf1.SetBit(2);
     bf1.SetBit(3);
@@ -303,6 +311,7 @@ TEST(Bit_Array_Test, And_Operator_First_Array_Less_Second) {
 TEST(Bit_Array_Test, And_Operator_Second_Array_Less_First) {
     const int size1 = sizeof(uint) * 8 * 5, size2 = sizeof(uint) * 8 * 3;
     BitArray bf1(size1), bf2(size2), expBf(size1);
+
     // bf1 = 1..1..100101
     bf1.SetBit(1);
     bf1.SetBit(3);
@@ -327,6 +336,7 @@ TEST(Bit_Array_Test, And_Operator_Second_Array_Less_First) {
 TEST(Bit_Array_Test, Can_Invert_Bit_Array) {
     const int size = 2;
     BitArray bf(size), negBf(size), expNegBf(size);
+
     // bf = 01
     bf.SetBit(1);
     negBf = ~bf;
@@ -340,6 +350,7 @@ TEST(Bit_Array_Test, Can_Invert_Bit_Array) {
 TEST(Bit_Array_Test, Can_Invert_Large_Bit_Array) {
     const int size = 38;
     BitArray bf(size), negBf(size), expNegBf(size);
+
     bf.SetBit(35);
     negBf = ~bf;
 
@@ -354,6 +365,7 @@ TEST(Bit_Array_Test, Invert_Plus_And_Operator_On_Different_Size_Bit_Array) {
     const int firstSze = 4, secondSize = 8;
     BitArray firstBf(firstSze), negFirstBf(firstSze),
              secondBf(secondSize), testBf(secondSize);
+
     // firstBf = 0001
     firstBf.SetBit(0);
     negFirstBf = ~firstBf;

@@ -205,6 +205,10 @@ TEST(Bit_Array_Test, Compare_Partially_Equal_Bit_Arrays_Second_Less_First) {
 TEST(Bit_Array_Test, Or_Operator_Applied_To_Bit_Arrays_Of_Equal_Size) {
     const int size = 4;
     BitArray bf1(size), bf2(size), expBf(size);
+    // expBf = 0111
+    expBf.SetBit(1);
+    expBf.SetBit(2);
+    expBf.SetBit(3);
 
     // bf1 = 0011
     bf1.SetBit(2);
@@ -213,17 +217,18 @@ TEST(Bit_Array_Test, Or_Operator_Applied_To_Bit_Arrays_Of_Equal_Size) {
     bf2.SetBit(1);
     bf2.SetBit(3);
 
-    // expBf = 0111
-    expBf.SetBit(1);
-    expBf.SetBit(2);
-    expBf.SetBit(3);
-
     ASSERT_EQ(expBf, bf1 | bf2);
 }
 
 TEST(Bit_Array_Test, Or_Operator_First_Array_Less_Second) {
     const int size1 = sizeof(uint) * 8 * 1, size2 = sizeof(uint) * 8 * 4;
     BitArray bf1(size1), bf2(size2), expBf(size2);
+    // expBf = 1..1..00111
+    expBf.SetBit(1);
+    expBf.SetBit(2);
+    expBf.SetBit(3);
+    expBf.SetBit(8);
+    expBf.SetBit(size2);
 
     // bf1 = 0..1..00110
     bf1.SetBit(2);
@@ -234,19 +239,19 @@ TEST(Bit_Array_Test, Or_Operator_First_Array_Less_Second) {
     bf2.SetBit(8);
     bf2.SetBit(size2);
 
-    // expBf = 1..1..00111
-    expBf.SetBit(1);
-    expBf.SetBit(2);
-    expBf.SetBit(3);
-    expBf.SetBit(8);
-    expBf.SetBit(size2);
-
     ASSERT_EQ(expBf, bf1 | bf2);
 }
 
 TEST(Bit_Array_Test, Or_Operator_Second_Array_Less_First) {
     const int size1 = sizeof(uint) * 8 * 6, size2 = sizeof(uint) * 8 * 2;
     BitArray bf1(size1), bf2(size2), expBf(size1);
+    // expBf = 1..1..1..100011
+    expBf.SetBit(1);
+    expBf.SetBit(2);
+    expBf.SetBit(6);
+    expBf.SetBit(8);
+    expBf.SetBit(16);
+    expBf.SetBit(size1);
 
     // bf1 = 1..1..1..000001
     bf1.SetBit(1);
@@ -259,20 +264,14 @@ TEST(Bit_Array_Test, Or_Operator_Second_Array_Less_First) {
     bf2.SetBit(6);
     bf2.SetBit(16);
 
-    // expBf = 1..1..1..100011
-    expBf.SetBit(1);
-    expBf.SetBit(2);
-    expBf.SetBit(6);
-    expBf.SetBit(8);
-    expBf.SetBit(16);
-    expBf.SetBit(size1);
-
     ASSERT_EQ(expBf, bf1 | bf2);
 }
 
 TEST(Bit_Array_Test, And_Operator_Applied_To_Bit_Arrays_Of_Equal_Size) {
     const int size = 4;
     BitArray bf1(size), bf2(size), expBf(size);
+    // expBf = 0001
+    expBf.SetBit(3);
 
     // bf1 = 0011
     bf1.SetBit(2);
@@ -281,15 +280,15 @@ TEST(Bit_Array_Test, And_Operator_Applied_To_Bit_Arrays_Of_Equal_Size) {
     bf2.SetBit(1);
     bf2.SetBit(3);
 
-    // expBf = 0001
-    expBf.SetBit(3);
-
     ASSERT_EQ(expBf, bf1 & bf2);
 }
 
 TEST(Bit_Array_Test, And_Operator_First_Array_Less_Second) {
     const int size1 = sizeof(uint) * 8 * 2, size2 = sizeof(uint) * 8 * 3;
     BitArray bf1(size1), bf2(size2), expBf(size2);
+    // expBf = 0..1..00010
+    expBf.SetBit(3);
+    expBf.SetBit(8);
 
     // bf1 = 0..1..00011
     bf1.SetBit(2);
@@ -301,16 +300,16 @@ TEST(Bit_Array_Test, And_Operator_First_Array_Less_Second) {
     bf2.SetBit(8);
     bf2.SetBit(size2);
 
-    // expBf = 0..1..00010
-    expBf.SetBit(3);
-    expBf.SetBit(8);
-
     ASSERT_EQ(expBf, bf1 & bf2);
 }
 
 TEST(Bit_Array_Test, And_Operator_Second_Array_Less_First) {
     const int size1 = sizeof(uint) * 8 * 5, size2 = sizeof(uint) * 8 * 3;
     BitArray bf1(size1), bf2(size2), expBf(size1);
+    // expBf = 0..1..100001
+    expBf.SetBit(1);
+    expBf.SetBit(6);
+    expBf.SetBit(12);
 
     // bf1 = 1..1..100101
     bf1.SetBit(1);
@@ -324,11 +323,6 @@ TEST(Bit_Array_Test, And_Operator_Second_Array_Less_First) {
     bf2.SetBit(6);
     bf2.SetBit(12);
 
-    // expBf = 0..1..100001
-    expBf.SetBit(1);
-    expBf.SetBit(6);
-    expBf.SetBit(12);
-
     ASSERT_EQ(expBf, bf1 & bf2);
 }
 
@@ -336,13 +330,12 @@ TEST(Bit_Array_Test, And_Operator_Second_Array_Less_First) {
 TEST(Bit_Array_Test, Can_Invert_Bit_Array) {
     const int size = 2;
     BitArray bf(size), negBf(size), expNegBf(size);
+    // expNegBf = 10
+    expNegBf.SetBit(0);
 
     // bf = 01
     bf.SetBit(1);
     negBf = ~bf;
-
-    // expNegBf = 10
-    expNegBf.SetBit(0);
 
     ASSERT_EQ(expNegBf, negBf);
 }
@@ -350,13 +343,12 @@ TEST(Bit_Array_Test, Can_Invert_Bit_Array) {
 TEST(Bit_Array_Test, Can_Invert_Large_Bit_Array) {
     const int size = 38;
     BitArray bf(size), negBf(size), expNegBf(size);
-
-    bf.SetBit(35);
-    negBf = ~bf;
-
     for (int i = 0; i < size; i++)
         expNegBf.SetBit(i);
     expNegBf.ClrBit(35);
+
+    bf.SetBit(35);
+    negBf = ~bf;
 
     ASSERT_EQ(expNegBf, negBf);
 }
@@ -365,6 +357,8 @@ TEST(Bit_Array_Test, Invert_Plus_And_Operator_On_Different_Size_Bit_Array) {
     const int firstSze = 4, secondSize = 8;
     BitArray firstBf(firstSze), negFirstBf(firstSze),
              secondBf(secondSize), testBf(secondSize);
+    // testBf = 00001000
+    testBf.SetBit(3);
 
     // firstBf = 0001
     firstBf.SetBit(0);
@@ -375,10 +369,7 @@ TEST(Bit_Array_Test, Invert_Plus_And_Operator_On_Different_Size_Bit_Array) {
     secondBf.SetBit(3);
     secondBf.SetBit(4);
 
-    // testBf = 00001000
-    testBf.SetBit(3);
-
-    ASSERT_EQ(secondBf & negFirstBf, testBf);
+    ASSERT_EQ(testBf, secondBf & negFirstBf);
 }
 
 TEST(Bit_Array_Test, Can_Invert_Many_Random_Bits_Bit_Array) {
@@ -393,15 +384,15 @@ TEST(Bit_Array_Test, Can_Invert_Many_Random_Bits_Bit_Array) {
     bits.push_back(33);
     bits.push_back(37);
 
-    for (unsigned int i = 0; i < bits.size(); i++)
-        bf.SetBit(bits[i]);
-
-    negBf = ~bf;
-
     for (int i = 0; i < size; i++)
         expNegBf.SetBit(i);
     for (unsigned int i = 0; i < bits.size(); i++)
         expNegBf.ClrBit(bits[i]);
+
+    for (unsigned int i = 0; i < bits.size(); i++)
+        bf.SetBit(bits[i]);
+
+    negBf = ~bf;
 
     ASSERT_EQ(expNegBf, negBf);
 }

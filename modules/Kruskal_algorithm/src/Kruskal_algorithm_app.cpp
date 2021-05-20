@@ -77,7 +77,7 @@ std::string KruskalAlgorithm::operator()(int argc, const char** argv) {
 
     std::stringstream stream;
     auto MST = g.get_MST();
-    for (int i = 0; i < MST.size(); ++i)
+    for (int i = 0; i < static_cast<int>(MST.size()); ++i)
         stream << "Edge: (" << MST[i].second.first << ", "
                << MST[i].second.second << "), weight: "
                << MST[i].first << std::endl;

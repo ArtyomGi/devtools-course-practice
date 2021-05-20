@@ -10,7 +10,9 @@
 
 KruskalAlgorithm::KruskalAlgorithm() : message_("") {}
 
-void KruskalAlgorithm::help(const std::string& appname, const std::string& message) {
+void KruskalAlgorithm::help(
+        const std::string& appname,
+        const std::string& message) {
     message_ =
         std::string(message) +
           "This is a Kruskal algorithm application.\n\n"

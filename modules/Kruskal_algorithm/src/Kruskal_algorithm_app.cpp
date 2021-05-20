@@ -3,10 +3,6 @@
 #include "include/Kruskal_algorithm.h"
 #include "include/Kruskal_algorithm_app.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>
-#include <string.h>
 #include <string>
 #include <sstream>
 #include <tuple>
@@ -14,7 +10,7 @@
 
 KruskalAlgorithm::KruskalAlgorithm() : message_("") {}
 
-void KruskalAlgorithm::help(const char* appname, const char* message) {
+void KruskalAlgorithm::help(const std::string& appname, const std::string& message) {
     message_ =
         std::string(message) +
           "This is a Kruskal algorithm application.\n\n"
@@ -75,7 +71,7 @@ std::string KruskalAlgorithm::operator()(int argc, const char** argv) {
 
     g.Kruskal();
 
-    std::stringstream stream;
+    std::ostringstream stream;
     auto MST = g.get_MST();
     for (int i = 0; i < static_cast<int>(MST.size()); ++i)
         stream << "Edge: (" << MST[i].second.first << ", "

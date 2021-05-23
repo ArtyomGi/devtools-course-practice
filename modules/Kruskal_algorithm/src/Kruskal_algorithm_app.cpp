@@ -37,7 +37,7 @@ bool KruskalAlgorithm::validateNumberOfArguments(int argc, const char** argv) {
     return true;
 }
 
-double parseInt(const char* arg) {
+double parseInt(const std::string& arg) {
     return std::stoi(arg);
 }
 
@@ -75,6 +75,7 @@ std::string KruskalAlgorithm::operator()(int argc, const char** argv) {
 
     std::ostringstream stream;
     auto MST = g.get_MST();
+
     for (int i = 0; i < static_cast<int>(MST.size()); ++i)
         stream << "Edge: (" << MST[i].second.first << ", "
                << MST[i].second.second << "), weight: "
